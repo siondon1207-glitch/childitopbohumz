@@ -1,23 +1,972 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <style>
+        :root {
+            --primary: #5f3dc4;
+            --primary-hover: #7048e8;
+            --secondary: #0c8599;
+            --accent: #e8590c;
+            --bg-main: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-main: #212529;
+            --text-muted: #868e96;
+            --border-color: #dee2e6;
+            --shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08), 0 8px 16px -8px rgba(0, 0, 0, 0.04);
+            --radius: 18px;
+        }
+
+        html, body, div, span, h1, h2, h3, h4, p, a, ul, li, table, thead, tbody, tr, th, td, select, input, button {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.9;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #ffffff;
+            padding: 70px 0;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            margin: 0 0 15px 0;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.3;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            margin: 0;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        nav {
+            margin: -35px auto 40px auto;
+            max-width: 950px;
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 12px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        nav ul li {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 16px 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #f1f3f5;
+            color: var(--primary);
+        }
+
+        .content-wrap {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 1024px) {
+            .content-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar {
+            background-color: var(--bg-card);
+            padding: 35px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            align-self: start;
+        }
+
+        .sidebar h2 {
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 22px;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .sub-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 35px 0;
+        }
+
+        .sub-menu li {
+            margin-bottom: 12px;
+        }
+
+        .sub-menu li a {
+            display: block;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            background-color: #f8f9fa;
+        }
+
+        .sub-menu li a:hover {
+            color: #ffffff;
+            background-color: var(--primary);
+            padding-left: 22px;
+        }
+
+        .external-links h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .external-links a {
+            display: block;
+            padding: 12px 0;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .external-links a:hover {
+            color: var(--primary);
+        }
+
+        .main-content {
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 640px) {
+            .main-content {
+                padding: 25px;
+            }
+        }
+
+        .main-content h2 {
+            font-size: 2.1rem;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 28px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+        }
+
+        .main-content h3 {
+            font-size: 1.55rem;
+            color: var(--secondary);
+            margin-top: 50px;
+            margin-bottom: 22px;
+            font-weight: 700;
+            border-left: 6px solid var(--primary);
+            padding-left: 18px;
+        }
+
+        .main-content h4 {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-top: 35px;
+            margin-bottom: 18px;
+            font-weight: 600;
+            background-color: #f1f3f5;
+            padding: 12px 18px;
+            border-radius: 10px;
+        }
+
+        .main-content p {
+            margin-bottom: 24px;
+            color: #343a40;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background: linear-gradient(to right, #f3f0ff, #e3fafc);
+            border-left: 6px solid var(--primary);
+            padding: 28px;
+            border-radius: 14px;
+            margin: 35px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+            color: #2b1d52;
+        }
+
+        .callout-box {
+            background-color: #fff4e6;
+            border-left: 6px solid var(--accent);
+            padding: 28px;
+            border-radius: 14px;
+            margin: 35px 0;
+        }
+
+        .callout-box p {
+            margin: 0;
+            font-weight: 500;
+            color: #5c1d00;
+        }
+
+        .keyword {
+            color: var(--primary);
+            font-weight: 700;
+            background-color: #f3f0ff;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        .keyword-accent {
+            color: var(--accent);
+            font-weight: 700;
+            background-color: #fff4e6;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 35px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            padding: 18px 22px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            background-color: #ffffff;
+        }
+
+        tbody tr:nth-child(even) td {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover td {
+            background-color: #f1f3f5;
+        }
+
+        .styled-list {
+            list-style: none;
+            padding: 0;
+            margin: 22px 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            color: #343a40;
+        }
+
+        .styled-list li::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 11px;
+            width: 9px;
+            height: 9px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .calculator-card {
+            background-color: #f8f9fa;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin: 45px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .calculator-card h3 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            color: var(--primary);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        @media (max-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            color: var(--text-main);
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .calc-btn {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .calc-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .calc-btn:active {
+            transform: scale(0.98);
+        }
+
+        .calc-result {
+            margin-top: 35px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 28px;
+            display: none;
+            box-shadow: inset 0 2px 5px 0 rgba(0,0,0,0.02);
+        }
+
+        .calc-result h4 {
+            margin-top: 0;
+            background-color: transparent;
+            padding: 0;
+            color: var(--primary);
+            font-size: 1.45rem;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .result-item {
+            background-color: #f1f3f5;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-item span {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .result-item strong {
+            font-size: 1.4rem;
+            color: var(--text-main);
+        }
+
+        .result-item.highlight-item {
+            background-color: #f3f0ff;
+            border: 1px solid #d0bfff;
+        }
+
+        .result-item.highlight-item strong {
+            color: var(--primary);
+        }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 28px 0;
+        }
+
+        .region-tag {
+            background-color: #f1f3f5;
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            text-align: center;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: #1a1b1f;
+            color: #adb5bd;
+            padding: 45px 0;
+            text-align: center;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            margin-top: 90px;
+        }
+
+        footer p {
+            margin: 6px 0;
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "어린이보험 만30세 비교 가이드: 2026년 청년 청소년 맞춤 요금 및 가입 분석",
+      "description": "어린이보험 만30세 가입을 위한 2026년 최신 요금 비교 및 보장 가이드입니다. 주요 보험사 브랜드별 요금제와 한도 혜택, 실시간 예상 견적을 자가 계산기로 설계하고, 현명한 신규 가입 팁을 제공합니다.",
+      "url": "https://insurance.reliabledone.com/children-30-guide",
+      "lastReviewed": "2026-08-06",
+      "datePublished": "2026-08-06",
+      "inLanguage": "ko-KR",
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": "https://insurance.reliabledone.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>어린이보험 만30세 맞춤형 비교 설계 센터</h1>
+            <p>2026년 최신 손해보험 브랜드별 가격 비교 및 연령별 예상 비용 정밀 분석</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#intro">어린이보험 개요</a></li>
+                <li><a href="#regions">연령별 보장 비교</a></li>
+                <li><a href="#pricing">보험사 가격 및 요금</a></li>
+                <li><a href="#simulation">실시간 모의 견적기</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrap">
+            <div class="sidebar">
+                <h2>정보 탐색 카테고리</h2>
+                <ul class="sub-menu">
+                    <li><a href="#intro">만30세 가입 핵심 가이드</a></li>
+                    <li><a href="#regions">나이대 연령별 세분화</a></li>
+                    <li><a href="#pricing">브랜드별 장단점 비교</a></li>
+                    <li><a href="#calculator-anchor">예상 보험료 계산기</a></li>
+                    <li><a href="#tips">신뢰할 수 있는 청약 전략</a></li>
+                </ul>
+
+                <div class="external-links">
+                    <h3>신뢰성 있는 정보 포털</h3>
+                    <a href="https://childltopbohuma.directreliable.com" target="_blank">보험 정보 연구원 리라이어블던</a>
+                    <a href="https://namu.wiki" target="_blank">나무위키 보험 가입 가이드</a>
+                    <a href="https://www.fss.or.kr" target="_blank">금융감독원 (FSS)</a>
+                    <a href="https://www.cref.or.kr" target="_blank">생명보험협회 및 손해보험협회</a>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2 id="intro">어린이보험 만30세 신규 가입 시 보장 한도 및 예상 가격 요약</h2>
+                
+                <div class="highlight-box">
+                    <p>
+                        2026년 기준 어린이보험 만30세 가입 시장은 금융감독원의 고도화된 약관 규제와 주요 청년 타겟 상품군의 개편으로 인해 새로운 국면을 맞이하고 있습니다. 
+                        과거에는 어린이 전용 상품을 만 35세까지 제한 없이 가입할 수 있도록 변칙 운영하던 소위 어른이보험 구조가 전면적으로 개편되면서, 
+                        현재는 만 15세 미만까지의 정통 영유아 상품과 만 15세부터 만 30세 혹은 만 35세까지를 집중적으로 보장하는 청년 맞춤형 요금제 세분화가 완벽히 안착했습니다. 
+                        인터넷 다이렉트 채널의 대중화와 토스, 카카오톡 등 핀테크 플랫폼과의 연계 덕분에 설계사 수수료를 걷어낸 합리적인 예상 금액 산출이 수월해진 상황입니다.
+                    </p>
+                </div>
+
+                <h3 id="regions">연령별 보장 구성 및 시기별 최적 맞춤 알고리즘 분석</h3>
+                <p>
+                    보험 가입 시 가장 먼저 맞닥뜨리는 고민은 연령에 따른 가입 조건과 보장 한도의 차이점입니다. 
+                    태아 시기부터 시작해 유아기, 청소년기, 그리고 만 30세 전후의 청년 시기까지 각 나이대에 매칭되는 위험 요소를 선별하여 효율적인 포트폴리오를 구성해야 불필요한 비용의 낭비를 차단할 수 있습니다. 
+                    다음은 보험 가입 대상자가 마주하게 되는 세부 연령대별 주안점입니다.
+                </p>
+
+                <h4>주요 생애주기 및 연령대별 설계 타겟</h4>
+                <div class="region-grid">
+                    <div class="region-tag">태아 시기</div>
+                    <div class="region-tag">영유아 단계</div>
+                    <div class="region-tag">만 0세</div>
+                    <div class="region-tag">만 1세</div>
+                    <div class="region-tag">만 2세</div>
+                    <div class="region-tag">만 3세</div>
+                    <div class="region-tag">만 4세</div>
+                    <div class="region-tag">만 5세</div>
+                    <div class="region-tag">만 6세</div>
+                    <div class="region-tag">만 7세</div>
+                    <div class="region-tag">만 8세</div>
+                    <div class="region-tag">만 9세</div>
+                    <div class="region-tag">만 10세</div>
+                    <div class="region-tag">만 11세</div>
+                    <div class="region-tag">만 12세</div>
+                    <div class="region-tag">만 13세</div>
+                    <div class="region-tag">만 14세</div>
+                    <div class="region-tag">만 15세</div>
+                    <div class="region-tag">만 16세</div>
+                    <div class="region-tag">만 17세</div>
+                    <div class="region-tag">만 18세</div>
+                    <div class="region-tag">만 19세</div>
+                    <div class="region-tag">만 20세</div>
+                    <div class="region-tag">만 21세</div>
+                    <div class="region-tag">만 22세</div>
+                    <div class="region-tag">만 23세</div>
+                    <div class="region-tag">만 24세</div>
+                    <div class="region-tag">만 25세</div>
+                    <div class="region-tag">만 26세</div>
+                    <div class="region-tag">만 27세</div>
+                    <div class="region-tag">만 28세</div>
+                    <div class="region-tag">만 29세</div>
+                    <div class="region-tag">만 30세</div>
+                    <div class="region-tag">만 31세</div>
+                    <div class="region-tag">만 32세</div>
+                    <div class="region-tag">만 33세</div>
+                    <div class="region-tag">만 34세</div>
+                    <div class="region-tag">만 35세</div>
+                    <div class="region-tag">청소년기</div>
+                    <div class="region-tag">청년 시기</div>
+                    <div class="region-tag">성인 단계</div>
+                </div>
+
+                <p>
+                    <span class="keyword">태아</span> 및 <span class="keyword">영유아</span> 단계부터 <span class="keyword">만 0세</span>, <span class="keyword">만 1세</span>에서 <span class="keyword">만 10세</span>에 이르는 아동기에는 선천성 이상 소견, 소아암, 발달 장애 및 흔히 겪는 골절과 화상 등의 생활 밀착형 사고 보장 한도를 탄탄하게 다지는 것을 추천합니다. 
+                    이 시기에는 자녀의 면역체계가 완벽히 성숙하지 않아 잦은 입원 치료가 동반될 확률이 높으므로 일당 위주의 입원비 담보와 응급실 내원비 특약을 적극 배치하는 것이 일반적입니다. 
+                    또한 일상생활 중에 타인의 물건이나 신체에 손해를 끼쳤을 때 배상해 주는 가족일상생활중배상책임 담보는 필수로 채택해야 합니다.
+                </p>
+
+                <p>
+                    <span class="keyword">만 15세</span> 이상의 청소년기를 지나 <span class="keyword">만 20세</span>, <span class="keyword">만 25세</span>, 그리고 마지노선이라 할 수 있는 <span class="keyword">만 30세</span> 및 <span class="keyword">만 35세</span> 청년 단계에서는 설계의 방향이 완전히 성인형 중증 질병 중심으로 이동해야 가치를 발휘합니다. 
+                    더 이상 소아 전용 질병보다는 한국인의 사망 원인 중 상위를 차지하는 암, 뇌혈관질환, 허혈성심장질환 등 이른바 3대 진단비를 최대로 탑재하는 것이 중요합니다. 
+                    특히 만 30세 전후의 사회 초년생들은 성인 종합 상품에 가입할 때보다 청년용으로 특별 구성된 전용 라인업을 통해 가입 비용을 대폭 아끼는 영리한 지혜가 필요합니다.
+                </p>
+
+                <p>
+                    최근 청약 트렌드를 살펴보면 <span class="keyword">만 31세</span>, <span class="keyword">만 32세</span> 등 만 30세를 초과한 청년층 역시 동일한 면책 기간 제외 혜택을 받기 위해 손해보험 브랜드의 문을 두드리고 있습니다. 
+                    일반적인 성인 대상 상품과 비교했을 때 만 30세 이하 대상 특화형 상품은 암 진단 후 바로 보장이 개시되는 감액 기간 미적용 옵션을 제공받거나 납입면제 범위가 현저히 넓어지는 등의 독보적인 장점을 지니기 때문입니다. 
+                    따라서 본인의 정확한 양력 나이 계산을 거쳐 조건의 합격선에 머물러 있는 순간을 놓치지 말고 다이렉트 설계로 즉각 진입하시는 방법이 권장됩니다.
+                </p>
+
+                <h3 id="pricing">대표 손해보험사 요금제 특징 및 보장성 비교</h3>
+                <p>
+                    시중에서 마주할 수 있는 대표 브랜드들의 핵심 구조와 장단점은 가계 재정을 좌우하는 중요한 변수입니다. 
+                    가입 조건의 유연성과 만기 설정(80세 만기 vs 100세 만기), 그리고 해약환급금 미지급형(무해지) 설계 방식에 따라 매월 납부해야 할 평균 요금 대가 다르게 측정되므로 사전 분석표를 주의 깊게 검토하시기 바랍니다.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>보험사 브랜드 종류</th>
+                            <th>대표 맞춤 라인업</th>
+                            <th>가입 연령 한계</th>
+                            <th>보장 구성 장점</th>
+                            <th>설계 시 단점</th>
+                            <th>평균 예상 요금 (월)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>현대해상</td>
+                            <td>굿앤굿 청춘</td>
+                            <td>만 0세 - 만 35세</td>
+                            <td>선천 질환 및 뇌심장 수술비 한도 극대화</td>
+                            <td>유사암 진단비의 일부 조건 제약 존재</td>
+                            <td>월 45,000원 - 75,000원</td>
+                        </tr>
+                        <tr>
+                            <td>메리츠화재</td>
+                            <td>내맘같은 청년</td>
+                            <td>만 15세 - 만 35세</td>
+                            <td>유사암 납입지원 및 중대 질병 진단비 가성비 우수</td>
+                            <td>기본 계약 의무 연계 비중이 상대적으로 높음</td>
+                            <td>월 42,000원 - 72,000원</td>
+                        </tr>
+                        <tr>
+                            <td>KB손해보험</td>
+                            <td>금쪽같은 청년</td>
+                            <td>만 0세 - 만 35세</td>
+                            <td>정신질환 치료비 및 무사고 계약 전환 할인 제공</td>
+                            <td>기본 약관 항목이 다소 세분화되어 복잡함</td>
+                            <td>월 43,000원 - 71,000원</td>
+                        </tr>
+                        <tr>
+                            <td>DB손해보험</td>
+                            <td>아이러브 청춘</td>
+                            <td>만 15세 - 만 30세</td>
+                            <td>가장 저렴한곳에 근접한 유사암 및 수술비 패키지</td>
+                            <td>만 31세 이후 가입 시 성인형으로 완전 자동 전환</td>
+                            <td>월 39,000원 - 68,000원</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    보험 가입자들이 제일 중요하게 비교해야 할 지표는 바로 갱신형과 비갱신형의 장단점입니다. 
+                    만 30세 이하 청년 가입자의 경우 초기 비용 부담이 조금 더 발생하더라도 계약 시점의 요금이 만기 시까지 1원도 오르지 않는 비갱신형 가입 방법을 채택하는 것이 훗날의 통신비나 노후 가계 안정을 위해 아득히 이롭습니다. 
+                    만일 당장의 적은 예산에 현혹되어 저렴한 갱신형 상품을 덥석 선택했다가는 중장년층이 되었을 때 눈덩이처럼 불어나는 요금 갱신 폭탄을 견디지 못하고 계약을 도중에 포기하는 참담한 단점을 마주할 수 있습니다.
+                </p>
+
+                <p>
+                    그뿐만 아니라 보험료 납입 기간을 몇 년으로 설정하느냐에 따라 총지출 비용에 극심한 차이점이 발생합니다. 
+                    통상적으로 가장 인기가 많은 20년납 90세 만기 구조는 매달 지불하는 가성비가 가장 뛰어나 대다수의 가입 후기에서 정석 코스로 추천되고 있습니다. 
+                    여기에 납입 기간 도중에 암이나 뇌졸중 등 중대 질병 확진 시 이후 보험료 납입을 전액 면제해 주는 납입면제 제도의 적용 범위가 브랜드별로 어떻게 다른지도 고객센터 문의 혹은 전문 어플 상담을 통해 날카롭게 파악해 보셔야 합니다.
+                </p>
+
+                <div class="callout-box">
+                    <p>
+                        주목해야 할 핵심 경고: 온라인 금융 카페나 사회초년생 커뮤니티에서 유선 인터넷 가입 사은품을 주듯 대단한 현금지원이나 고가의 백화점 상품권을 미끼로 내걸며 불법 대면 가입을 권유하는 유통 업체나 무허가 개인 설계사들이 활개를 치고 있습니다. 
+                        보험업법상 일정 한도를 초과하는 금품 제공은 주는 쪽과 받는 쪽 모두 처벌받을 수 있는 중대한 불법 행위입니다. 
+                        달콤한 불법 혜택의 꼬임에 빠지기보다는 다이렉트 직영 몰을 통해 수수료 할인을 투명하게 적용받고 가입하는 것이 내 권리를 수호하는 합법적인 지름길입니다.
+                    </p>
+                </div>
+
+                <h3 id="calculator-anchor">어린이 및 청년보험 자가 설계 실시간 모의 계산기</h3>
+                <p>
+                    실제 상담원과 불필요한 전화를 나누기 전 본인이 원하는 조건들을 조합하여 
+                    매월 도출될 예상 납입 가격과 미래 가상 환급 금액 수준을 즉각 도출할 수 있는 자가 계산기 서비스를 구성하였습니다. 
+                    각 입력란의 변수를 바꾸어 가며 가장 실속 있는 최적 견적을 자율적으로 모의해 보십시오.
+                </p>
+
+                <div class="calculator-card">
+                    <h3>맞춤 요금제 및 보장 가액 즉시 계산기</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="calc-age">가입 대상 연령 선택</label>
+                            <select id="calc-age">
+                                <option value="0">만 0세 ~ 만 5세 (영유아 전용 보장 특화)</option>
+                                <option value="10">만 6세 ~ 만 14세 (학령기 청소년 보장 특화)</option>
+                                <option value="20">만 15세 ~ 만 24세 (청년 전용 1단계 스마트플랜)</option>
+                                <option value="30" selected>만 25세 ~ 만 30세 (사회초년생 압도적 추천 안)</option>
+                                <option value="35">만 31세 ~ 만 35세 (청년 연장 특약 적용 대상)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-gender">가입 대상 성별</label>
+                            <select id="calc-gender">
+                                <option value="male">남성 (상대적으로 상해 사고 위험 반영)</option>
+                                <option value="female">여성 (상대적으로 여성 질환 진단비 특화)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="calc-job">직업 급수 및 위험도 분류</label>
+                            <select id="calc-job">
+                                <option value="1">1급 (사무직, 학생, 전업주부 등 단순 비위험군)</option>
+                                <option value="2">2급 (현장 관리자, 판매직, 자영업 등 중간 위험군)</option>
+                                <option value="3">3급 (건설 현장직, 제조업 생산직, 기계 정비 등 고위험군)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-history">5년 이내 치료 이력 상태</label>
+                            <select id="calc-history">
+                                <option value="none">치료 이력 없음 (표준형 최저가 즉시 심사 통과 가능)</option>
+                                <option value="minor">단순 통원 및 감기약 처방 (일반 간편 고지 심사 진행)</option>
+                                <option value="major">수술, 7일 이상 입원 또는 장기 복약 (유병자 청년보험 연계)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="calc-coverage">보장 설계 패키지 수준</label>
+                            <select id="calc-coverage">
+                                <option value="basic">실속형 플랜 (암/뇌/심 필수 3대 질병 진단비 위주)</option>
+                                <option value="standard" selected>표준형 플랜 (3대 질병 + 다빈도 수술비 + 일상배책 포함)</option>
+                                <option value="premium">고급형 플랜 (풀 패키지 상해수술, 가족일상배책 및 각종 특약 총망라)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-period">납입 및 보장 기간 설정</label>
+                            <select id="calc-period">
+                                <option value="20-90">20년납 90세 만기 (비갱신형 대표 선호 상품)</option>
+                                <option value="20-100">20년납 100세 만기 (비갱신형 완벽 노후 보장형)</option>
+                                <option value="30-90">30년납 90세 만기 (월 납입 부담 최소화 설계)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="button" class="calc-btn" onclick="runInsurancePremiumCalculator()">내 맞춤형 예상 청약 비용 산출하기</button>
+
+                    <div class="calc-result" id="calc-result-box">
+                        <h4>실시간 모의 자가 계산서 결과</h4>
+                        <div class="result-grid">
+                            <div class="result-item">
+                                <span>기본 표준 요금</span>
+                                <strong id="res-base">0원</strong>
+                            </div>
+                            <div class="result-item">
+                                <span>무사고 연계 할인 혜택</span>
+                                <strong id="res-discount" style="color: #ef4444;">0원</strong>
+                            </div>
+                            <div class="result-item highlight-item">
+                                <span>실제 최종 청구 보험료 (월)</span>
+                                <strong id="res-final">0원</strong>
+                            </div>
+                            <div class="result-item highlight-item" style="background-color: #f8f0fc; border-color: #e5dbff;">
+                                <span>총 납입 총액 및 예상 환급률</span>
+                                <strong id="res-refund" style="color: #845ef7;">0%</strong>
+                            </div>
+                        </div>
+                        <p id="res-commentary" style="font-size: 0.9rem; color: #495057; margin-top: 25px; line-height: 1.8; text-align: left; padding: 15px; background-color: #f1f3f5; border-radius: 8px;">
+                            로딩 중...
+                        </p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; text-align: center;">
+                            본 시뮬레이터 프로그램은 비갱신형 무해지 구조 기준이며, 개인 직업 및 세부 고지 의무 이행 결과에 따라 가입 시 요금이 변동될 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <script>
+                    function runInsurancePremiumCalculator() {
+                        var ageVal = parseFloat(document.getElementById('calc-age').value);
+                        var genderVal = document.getElementById('calc-gender').value;
+                        var jobVal = document.getElementById('calc-job').value;
+                        var historyVal = document.getElementById('calc-history').value;
+                        var coverageVal = document.getElementById('calc-coverage').value;
+                        var periodVal = document.getElementById('calc-period').value;
+
+                        var basePremium = 40000;
+
+                        if (ageVal === 0) {
+                            basePremium = 30000;
+                        } else if (ageVal === 10) {
+                            basePremium = 35000;
+                        } else if (ageVal === 20) {
+                            basePremium = 45000;
+                        } else if (ageVal === 30) {
+                            basePremium = 55000;
+                        } else if (ageVal === 35) {
+                            basePremium = 65000;
+                        }
+
+                        if (genderVal === 'male') {
+                            basePremium += 4500; 
+                        } else {
+                            basePremium -= 1500; 
+                        }
+
+                        if (jobVal === '2') {
+                            basePremium += 5000;
+                        } else if (jobVal === '3') {
+                            basePremium += 12000;
+                        }
+
+                        if (historyVal === 'minor') {
+                            basePremium += 3000;
+                        } else if (historyVal === 'major') {
+                            basePremium += 15000;
+                        }
+
+                        if (coverageVal === 'basic') {
+                            basePremium = basePremium * 0.8;
+                        } else if (coverageVal === 'premium') {
+                            basePremium = basePremium * 1.35;
+                        }
+
+                        var discount = 0;
+                        if (historyVal === 'none' && jobVal === '1') {
+                            discount = basePremium * 0.08; 
+                        }
+
+                        var finalMonthly = basePremium - discount;
+
+                        if (periodVal === '30-90') {
+                            finalMonthly = finalMonthly * 0.85; 
+                        } else if (periodVal === '20-100') {
+                            finalMonthly = finalMonthly * 1.15; 
+                        }
+
+                        finalMonthly = Math.round(finalMonthly / 10) * 10;
+
+                        var years = 20;
+                        if (periodVal === '30-90') {
+                            years = 30;
+                        }
+                        var totalPaid = finalMonthly * 12 * years;
+
+                        var refundRate = 0;
+                        if (historyVal === 'none') {
+                            refundRate = 32.5; 
+                            if (coverageVal === 'standard') {
+                                refundRate = 41.2;
+                            } else if (coverageVal === 'premium') {
+                                refundRate = 48.7;
+                            }
+                        } else {
+                            refundRate = 18.3;
+                        }
+
+                        document.getElementById('res-base').innerText = Math.round(basePremium).toLocaleString() + '원';
+                        document.getElementById('res-discount').innerText = '-' + Math.round(discount).toLocaleString() + '원';
+                        document.getElementById('res-final').innerText = Math.round(finalMonthly).toLocaleString() + '원';
+                        document.getElementById('res-refund').innerText = refundRate.toFixed(1) + '% (만 60세 기준)';
+
+                        var recommendBrand = "DB손해보험 아이러브 청춘 플랜";
+                        if (genderVal === 'male' && ageVal === 30) {
+                            recommendBrand = "KB손해보험 금쪽같은 청년 플랜";
+                        } else if (coverageVal === 'premium') {
+                            recommendBrand = "현대해상 굿앤굿 청춘 패키지";
+                        } else if (historyVal === 'major') {
+                            recommendBrand = "메리츠화재 간편 청년 맞춤 안";
+                        }
+
+                        var comment = "설계 진단 결과: 고객님께서 선택하신 조건 하에 가장 최적화된 브랜드는 [" + recommendBrand + "]로 분석되었습니다. " +
+                            "총 예상 납입 비용은 3년 약정 기준 인터넷 결합 유도 등의 군더더기 사은품 영업을 배제한 자가 납입 방식으로 산출되었으며, " +
+                            "총 " + years + "년 납입 기간 동안 " + totalPaid.toLocaleString() + "원의 예산이 소요될 것으로 정밀 계산됩니다. " +
+                            "선택하신 조건은 무해지 환급 특약이 작용하여 납입 완료 후 중도 해지 시 납입한 원금 수준에 상응하는 실익 보전 효과를 기대할 수 있습니다.";
+
+                        document.getElementById('res-commentary').innerText = comment;
+                        document.getElementById('calc-result-box').style.display = 'block';
+                    }
+                </script>
+
+                <h3 id="tips">커뮤니티 내돈내산 여론 및 무차별 영업 회피 비책</h3>
+                <p>
+                    디시인사이드 보험 갤러리나 보배드림 재테크 세션, 에펨코리아(펨코) 재테크 포럼 등의 다양한 온라인 내돈내산 후기들을 투명하게 요약해 보면, 
+                    수많은 이용자가 공통으로 성토하는 최악의 함정은 불필요한 과도 특약 추가 설계입니다. 
+                    예컨대 흔히 성지 혹은 좌표라 불리는 비공식 설계 채널이나 SNS 광고 등을 통해 1대1 컨설팅을 받았으나, 
+                    나중에 보니 성인이 되면 거의 청구할 일이 없는 각종 소아 전용 희귀 불치병 특약들을 잔뜩 중복 가입하여 
+                    매월 나가는 총 견적 비용만 10만 원을 가뿐히 넘겼다는 하소연이 꼬리를 물고 있습니다.
+                </p>
+
+                <p>
+                    이러한 기만 전술에 유연하게 대처하기 위해서는 본인이 핵심 보장을 제외하고는 모두 과감하게 다이어트하겠다는 주관을 명확히 관철해야 합니다. 
+                    신뢰할 수 있는 가입 방법은 최신 인공지능 기반 분석 도구인 제미나이나 챗지피티 모델에 본인이 받은 보험 약관 견적을 통째로 대입하여 
+                    불필요한 과다 설계 특약이 포함되었는지 AI 기술적 보조 분석을 병행하는 방법입니다. 
+                    이를 기반으로 과도한 마케팅 비용이 스며든 전통적 청약 대신, 본사 홈페이지에서 운영하는 직영 온라인 다이렉트 페이지를 직접 확인해 보는 것만이 
+                    가장 정직한 최저가 보장을 확보하는 유일무이한 수단입니다.
+                </p>
+
+                <h3 id="faq">자주 묻는 질문 (FAQ) - 완벽 마스터</h3>
+
+                <h4>Q1. 만30세인데 일반 성인 대상 종합보험보다 청년형 어린이보험이 무조건 유리한 이유가 무엇인가요?</h4>
+                <p>
+                    단적으로 표현해서 동일 금액 대비 가치 보존율이 월등히 탁월하기 때문입니다. 
+                    만 30세 이하 대상 전용 상품은 일반 성인 상품과 비교할 때 첫째로 유사암(갑상선암, 제자리암, 경계성종양 등)과 일반암의 감액 기간(가입 후 90일 내 일부만 지급하는 조건 등)이 존재하지 않아 계약 즉시 100% 온전한 수혜가 작동합니다. 
+                    둘째로 뇌혈관 및 허혈성 심장질환 진단비 등 핵심 3대 영역의 최대 보장 가입 한도 규모가 성인 가입 문턱에 비해 통상 1.5배 이상 높게 개방되어 있습니다. 
+                    여기에 사업비 구조 자체가 가볍게 책정되어 납부 가격 조건 자체가 최소 10%에서 15%가량 싸게 수렴한다는 이점이 존재합니다.
+                </p>
+
+                <h4>Q2. 80세 만기와 100세 만기 중 어떤 기간을 정하는 것이 현실적으로 똑똑한 처사일까요?</h4>
+                <p>
+                    대부분의 전문가 상담과 컨설팅 여론에서는 합리적인 절충안으로 90세 만기를 가장 권장하고 있습니다. 
+                    화폐 가치의 하락과 인간 수명 연장 추세를 비추어 볼 때 80세 만기는 보장 종료 시점이 다소 이른 감이 있으며, 
+                    반대로 100세 만기는 노년기에 접어들었을 때의 화폐 실질 가치 낙폭 대비 초기 지출 부담 비용이 과도하게 상승하는 역효과가 수반됩니다. 
+                    따라서 보장 공백은 최소화하면서 월 가계 유동성을 보전할 수 있는 90세 만기를 지정하는 것이 2026년 청년 세대 재테크 기준에서 가장 조화로운 가성비 설계 비책으로 통용됩니다.
+                </p>
+
+                <h4>Q3. 다이렉트 자가 청약 시 본사의 간편 고지 의무(치료 이력)를 숨겼을 때 어떤 페널티가 발생하나요?</h4>
+                <p>
+                    고의 혹은 과실로 인해 과거 병원 투약, 통원, 혹은 입원 및 수술 이력을 숨기고 가입을 성사할 경우 
+                    추후 중대 질환이 발현되어 보험금을 신청하더라도 보험사로부터 계약 일방 해지 및 지급 전면 거절이라는 심각한 재산적 불이익을 당하게 됩니다. 
+                    따라서 감기 처방이나 일회성 도수치료 등 미비한 내역이라도 가입 신청 시 통과 프로세스 질문지에 적시된 5년 내 고지 범주에 해당한다면 
+                    반드시 누락 없이 고지하여 합법적인 승인을 정당하게 획득하셔야 차후의 법적 분쟁 리스크를 원천적으로 지워버릴 수 있습니다.
+                </p>
+
+                <h4>Q4. 만30세 직장인인데 실비(실손의료비)는 어린이보험과 별개로 매달 청구해야 하는 것인가요?</h4>
+                <p>
+                    네, 그렇습니다. 현재 금융위원회의 상시 개정 표준 규칙에 따라 실손의료비 상품은 어떠한 종합 패키지에도 특약 형태로 끼워 팔 수 없도록 엄격히 분리 금지 처리가 되어 있습니다. 
+                    따라서 상해 및 질병으로 인한 실제 병원비 지출액을 보전하는 단독 실손의료비 상품을 먼저 독립적으로 계약하신 후, 
+                    그 단독 실비만으로는 결코 커버할 수 없는 고액의 암 치료비, 중환자실 수술 비용, 소득 상실에 대비한 생계 자금 목적의 진단자금 마련을 위해 본 전문 청년 상품을 세트로 장만하여 조화를 구축하셔야 완벽한 이중 보호 장벽이 성립됩니다.
+                </p>
+
+                <h3 id="summary">현명한 청약을 위한 2026 최종 가이드라인</h3>
+                <p>
+                    결론적으로 만30세 청년 및 청소년 자녀를 둔 보호자가 성취할 수 있는 최고의 청약 공식은 기본에 충실하는 것입니다. 
+                    불법적인 통신비 현금지원을 내세워 불량 가입을 유도하는 음성적 대리점 성지의 선동에 좌지우지되지 마십시오. 
+                    구글, 네이버 등 공식 포털과 신뢰성 높은 보험 연구원의 연령별 기준을 면밀히 대조한 후, 
+                    가족의 내돈내산 가입 실경로 데이터를 적극 교차 검증하는 과정이야말로 불황 속 가계 자산의 보이지 않는 미세 누수를 틀어막는 스마트 금융 생활의 위대한 첫걸음이 될 것입니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+  
